@@ -11,6 +11,7 @@ const Cryptocurrencies = ({simplified}) => {
   const {data: cryptosList, isFetching} = useGetCryptosQuery(count);
   const [cryptos, setCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  // console.log(cryptos)
 
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Cryptocurrencies = ({simplified}) => {
       <Row gutter={[32,32]} className='crypto-card-container' >
           {cryptos?.map((currency) => (
             <Col xs={24} sm={12} lg={6} className='crypto-card' key={currency.id}>
-              <Link to={`/crypto/${currency.id}`}>
+              <Link to={`/crypto/${currency.uuid}`}>
                 <Card 
                  extra={<img className="crypto-image" src={currency.iconUrl} />} hoverable
                  title={`${currency.rank}. ${currency.name}`}>
