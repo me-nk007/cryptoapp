@@ -80,6 +80,7 @@
 
 
 import React from 'react';
+import CryptoDetails from './CryptoDetails';
 import { Line } from 'react-chartjs-2';
 import { Col, Row, Typography } from 'antd';
 import Chart from 'chart.js/auto';
@@ -90,41 +91,26 @@ Chart.register(CategoryScale);
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
-  // const coinPrice = [];
-  // const coinTimestamp = [];
+  const coinPrice = [];
+  const coinTimestamp = [];
+  // console.log("Coin History : ", coinHistory)
 
   // for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
   //   coinPrice.push(coinHistory?.data?.history[i].price);
   // }
+  // console.log("Coin Timestamp1 : ", coinTimestamp)
 
   // for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
   //   coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString());
   // }
+  for (let i=0; i < coinHistory?.data?.history?.length; i++){
+        coinPrice.push(coinHistory.data.history[i].price)
+        const timestampInSeconds = coinHistory?.data?.history[i].timestamp;
+        const timestampInMilliseconds = timestampInSeconds * 1000; // Convert seconds to milliseconds
+        coinTimestamp.push(new Date(timestampInMilliseconds).toLocaleDateString());
 
+      }
 
-  const coinPrice = [10000, 20000, 300000, 400000];
-const coinTimestamp = ['label1', 'label1', 'label1', 'label1'];
-
-const coinHistoryData = coinHistory?.data?.history || []; // Ensure we have valid data
-console.log(coinHistoryData)
-
-for (let i = 0; i < coinHistoryData.length; i += 1) {
-  const dataPoint = coinHistoryData[i];
-  console.log(dataPoint)
-
-
-  if (dataPoint) {
-    coinPrice.push(dataPoint.price);
-    coinTimestamp.push(new Date(dataPoint.timestamp).toLocaleDateString());
-  }
-}
-
-for (let i = 0; i < coinHistory && coinHistory.data && coinHistory.data.history && i < coinHistory.data.history.length; i++) {
-  const price = coinHistory.data.history[i].price;
-  coinPrice.push(price);
-  const timestamp  = new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString()
-  coinTimestamp.push(timestamp)
-}
 
   const data = {
     labels: coinTimestamp,
@@ -150,18 +136,6 @@ for (let i = 0; i < coinHistory && coinHistory.data && coinHistory.data.history 
       ],
     },
   };
-
-
-// const options = {
-//   scales: {
-//     x: {
-//       type: 'category', // Use 'category' for categorical data
-//     },
-//     y: {
-//       beginAtZero: true,
-//     },
-//   },
-// };
 
   return (
     <>

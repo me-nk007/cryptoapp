@@ -37,13 +37,21 @@ export const cryptoApi = createApi({
     getCryptoDetails: builder.query({
         query: (coinuuId)  =>createRequest(`/coin/${coinuuId}`),
     }),
+    // getCryptoHistory: builder.query({
+    //     // query: ({coinuuId, timePeriod})  =>createRequest(`
+    //     // coin/${coinuuId}/history/${timePeriod}`),
+    //     query: ({coinuuId, timePeriod})  =>createRequest(`
+    //      coin/${coinuuId}/history?timePeriod=${timePeriod}`),
+        
+    // }),
     getCryptoHistory: builder.query({
-        query: ({coinuuId, timePeriod})  =>createRequest(`
-        coin/${coinuuId}/history?timePeriod=${timePeriod}`),
-        // coin/${coinuuId}/history/${timePeriod}`),
-    })
+      query: ({ coinuuId, timeperiod }) => createRequest(`coin/${coinuuId}/history?timeperiod=${timeperiod}`),
+    }),
 
   })
+
 })
 
 export const { useGetCryptosQuery, useGetCryptoDetailsQuery, useGetCryptoHistoryQuery} = cryptoApi;
+// coin/${coinuuId}/history?timePeriod=${timePeriod}`),
+// coin/${coinuuId}/history/${timePeriod}`),

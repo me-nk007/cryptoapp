@@ -20,7 +20,7 @@ const CryptoDetails = () => {
   const {data, isFetching} = useGetCryptoDetailsQuery(coinuuId);
   const {data : coinHistory} = useGetCryptoHistoryQuery({coinuuId, timePeriod});
   const cryptoDetails = data?.data?.coin;
-
+  console.log("Let's see the coinHistory : ", coinHistory)
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
   if (isFetching) {
@@ -46,7 +46,6 @@ const CryptoDetails = () => {
     { title: 'Total Supply', value: `$ ${millify(cryptoDetails.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
     { title: 'Circulating Supply', value: `$ ${millify(cryptoDetails.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
   ];
-
 
   return (
     <Col className='coin-detail-container'>
@@ -140,6 +139,7 @@ const CryptoDetails = () => {
        </Col>
     </Col>
   );
+
 
 
 };
